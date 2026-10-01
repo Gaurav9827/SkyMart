@@ -61,7 +61,13 @@ const AuthContext = ({ children }) => {
 
   return (
     <MyStore.Provider
-      value={{ registerUser, loggedInUser, user, setUser, logoutUser }}
+      value={{
+        registerUser,
+        loggedInUser,
+        user,
+        setUser,
+        logoutUser,
+      }}
     >
       {children}
     </MyStore.Provider>

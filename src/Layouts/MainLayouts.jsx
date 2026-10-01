@@ -1,10 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router";
+import Navbar from "../Components/Navbar";
 
 const MainLayouts = () => {
   return (
-    <div className=" h-screen bg-red-300">
-        <h1>Navbar</h1>
+    <div className="min-h-screen text-white flex flex-col gap-3  bg-black">
+        <Navbar/>
       <Outlet />
     </div>
   );
