@@ -5,10 +5,13 @@ import { RouterProvider } from "react-router";
 import router from "./Routes/AppRoutes";
 import AuthContext from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
+import CartContext from "./context/CartContext";
 
 createRoot(document.getElementById("root")).render(
   <AuthContext>
-    <RouterProvider router={router} />
+    <CartContext>
+      <RouterProvider router={router} />
       <ToastContainer position="top-right" autoClose={3000} />
+    </CartContext>
   </AuthContext>,
 );

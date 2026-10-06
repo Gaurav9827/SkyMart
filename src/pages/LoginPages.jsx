@@ -4,32 +4,16 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { MyStore } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { useAuthHook } from "../hooks/useAuthHook";
 
 const LoginPages = () => {
-  const navigate = useNavigate();
-  const [loginError, setLoginError] = useState("");
-  let { loggedInUser } = useContext(MyStore);
-
-  let {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-
-  let formSubmit = (data) => {
-    const response = loggedInUser(data.email, data.password);
-    if (!response.success) {
-      setLoginError(response.message);
-      
-      return;
-    }
-    setLoginError("");
-    toast.success(response.message);
-    
-    navigate("/");
   
-  };
+  
+ 
+
+  const{register, handleSubmit, loginFormSubmit, loginError,navigate} = useAuthHook()
+
+  
 
   return (
     <div className="bg-black min-h-screen flex flex-col lg:flex-row lg:divide-x lg:divide-zinc-800">
@@ -111,7 +95,7 @@ const LoginPages = () => {
           </p>
 
           <form
-            onSubmit={handleSubmit(formSubmit)}
+            onSubmit={handleSubmit(loginFormSubmit)}
             className="flex flex-col gap-5"
           >
             {loginError &&(

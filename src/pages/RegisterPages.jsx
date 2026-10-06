@@ -1,33 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Zap } from "lucide-react";
-import { data, useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
-import { MyStore } from "../context/AuthContext";
-import { toast } from "react-toastify";
+import { useAuthHook } from "../hooks/useAuthHook";
 
 const RegisterPages = () => {
-  const navigate = useNavigate();
-  const { registerUser } = useContext(MyStore);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { error },
-  } = useForm();
-
-  const formSubmit = (data) => {
-    const response = registerUser(data);
-    if (!response.success) {
-      toast.error(response.message);
-    } else {
-      toast.success("user register  successful!");
-
-      navigate("/");
-    }
-  };
-  const onError = () => {
-    toast.error("Fill all fields");
-  };
+  const { register, handleSubmit, registerFormSubmit, registerError,navigate } =
+    useAuthHook();
 
   return (
     <div className="w-full bg-black min-h-screen flex flex-col items-center justify-center p-4">
@@ -52,7 +29,7 @@ const RegisterPages = () => {
         <p className="text-gray-500 mb-8">Join SkyMart and start shopping</p>
 
         <form
-          onSubmit={handleSubmit(formSubmit, onError)}
+          onSubmit={handleSubmit(registerFormSubmit, registerError)}
           className="flex flex-col gap-5"
         >
           <input
